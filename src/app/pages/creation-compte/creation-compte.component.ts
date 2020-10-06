@@ -51,8 +51,9 @@ export class CreationCompteComponent implements OnInit {
     this.isValider = true;
     if(this.creationCompteForm.valid){
       console.log("form valide");
+      //recuperd les informations du formulaire 
+      
     }else{
-      console.log("form non valide");
       return;
     }
   }
