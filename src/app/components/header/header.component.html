@@ -10,18 +10,20 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Acceuil<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
+            </ul>
+            <div class="nav-item dropdown">
+                <ul class="navbar-nav mr-auto">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      Mon compte
+                            Mon compte
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#"><img src="./assets/profil/account_circle-24px.svg" alt="">{{pseudo}}</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <button type="button" class="btn btn-primary btn-block">Connexion</button>
+                        <button type="button" class="btn btn-danger btn-block">Déconnexion</button>
                     </div>
-                </li>
-            </ul>
+                </ul>
+            </div>
         </div>
     </nav>
 </header>
