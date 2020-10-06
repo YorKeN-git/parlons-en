@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CreationCompteService } from 'src/app/services/creation-compte.service';
 
 @Component({
   selector: 'app-creation-compte',
@@ -10,7 +11,7 @@ export class CreationCompteComponent implements OnInit {
   creationCompteForm: FormGroup;
   isValider: boolean = false;
   
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,private creationCompteService: CreationCompteService) { }
 
   ngOnInit() {
     this.creationCompteForm = this.formBuilder.group({
@@ -52,7 +53,12 @@ export class CreationCompteComponent implements OnInit {
     if(this.creationCompteForm.valid){
       console.log("form valide");
       //recuperd les informations du formulaire 
-      
+      let nom = this.creationCompteForm.get('validationNom').value;
+      let prenom = this.creationCompteForm.get('validationPrenom').value;
+      let userName = this.creationCompteForm.get('validationUsername').value;
+      let email = this.creationCompteForm.get('validationEmail').value;
+      let mdp = this.creationCompteForm.get('validationMdp').value;
+      this.creationCompteService.crerCompteUtilisateur(nom, prenom, userName, email, mdp);
     }else{
       return;
     }
