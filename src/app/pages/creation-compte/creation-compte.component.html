@@ -7,18 +7,18 @@
                     <!-- Prénom  -->
                     <div class="col-md-4 mb-3">
                         <label for="validationPrenom">Prénom</label>
-                        <input type="text" class="form-control" id="validationPrenom" placeholder="John" value="" required>
-                        <div class="valid-feedback">
-                            OK!
+                        <input type="text" class="form-control" id="validationPrenom" formControlName="validationPrenom" placeholder="John" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationPrenom.errors }">
+                        <div class="invalid-feedback">
+                            Prénom est requis !
                         </div>
                     </div>
                     <!-- /Prénom  -->
                     <!-- Nom -->
                     <div class="col-md-4 mb-3">
                         <label for="validationNom">Nom</label>
-                        <input type="text" class="form-control" id="validationNom" placeholder="Doe" value="" required>
-                        <div class="valid-feedback">
-                            OK!
+                        <input type="text" class="form-control" id="validationNom" formControlName="validationNom" placeholder="Doe" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationNom.errors }">
+                        <div class="invalid-feedback">
+                            Nom est requis !
                         </div>
                     </div>
                     <!-- /Nom -->
@@ -29,9 +29,9 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend"><img src="./assets/creationCompte/person-24px.svg" alt="" srcset=""></span>
                             </div>
-                            <input type="text" class="form-control" id="validationUsername" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required>
+                            <input type="text" class="form-control" id="validationUsername" formControlName="validationUsername" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationUsername.errors }">
                             <div class="invalid-feedback">
-                                S'il vous plaît, choisissez un nom d'utilisateur.
+                                Nom d'utilisateur est requis !
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                             </div>
-                            <input type="e-mail" class="form-control" id="validationEmail" placeholder="name@mail.com" aria-describedby="inputGroupPrepend" required>
+                            <input type="e-mail" class="form-control" id="validationEmail" formControlName="validationEmail" placeholder="name@mail.com" aria-describedby="inputGroupPrepend" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationEmail.errors }">
                             <div class="invalid-feedback">
                                 Veuillez entrer un e-mail valide.
                             </div>
@@ -55,29 +55,37 @@
                     <!-- Mdp -->
                     <div class="col-md-4 mb-3">
                         <label for="validationMdp">Mot de passe</label>
-                        <input type="password" class="form-control" id="validationMdp" value="" required>
+                        <input type="password" class="form-control" id="validationMdp" formControlName="validationMdp" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationMdp.errors }">
+                        <div *ngIf="isValider && verifierChamp.validationMdp.errors" class="invalid-feedback">
+                            <div *ngIf="verifierChamp.validationMdp.errors.required">Mot de passe est requis !</div>
+                            <div *ngIf="verifierChamp.validationMdp.errors.minlength">Le mot de passe doit comprendre au minimum 6 charactères !</div>
+                        </div>
                     </div>
                     <!-- /Mdp -->
                     <!-- Confirmation Mdp -->
                     <div class="col-md-4 mb-3">
                         <label for="validationMdpConfirmer">Confirmation du mot de passe</label>
-                        <input type="password" class="form-control" id="validationMdpConfirmer" value="" required>
+                        <input type="password" class="form-control" id="validationMdpConfirmer" formControlName="validationMdpConfirmer" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationMdpConfirmer.errors }">
+                        <div *ngIf="isValider && verifierChamp.validationMdpConfirmer.errors" class="invalid-feedback">
+                            <div *ngIf="verifierChamp.validationMdpConfirmer.errors.required">Mot de passe est requis !</div>
+                            <div *ngIf="verifierChamp.validationMdpConfirmer.errors.concordanceMdp">Non concordance des mots de passes !</div>
+                        </div>
                     </div>
                     <!-- /Confirmation Mdp -->
                 </div>
                 <div class="form-group">
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                        <label class="form-check-label" for="invalidCheck">
-                      Agree to terms and conditions
+                        <input class="form-check-input" type="checkbox" value="" formControlName="accepterTerm" id="accepterTerm" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.accepterTerm.errors }">
+                        <label class="form-check-label" for="accepterTerm">
+                            En cochant cette case, vous reconnaissez avoir pris connaissance et accepté les conditions générales d'utilisation du site. 
                     </label>
-                        <div class="invalid-feedback">
-                            You must agre before submitting.
+                        <div *ngIf="isValider && verifierChamp.accepterTerm.errors" class="invalid-feedback">
+                            Vous devez accepter les conditions générales d'utilisation du site.
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary" type="submit">Créer mon compte</button>
-                <button class="btn btn-secondary" type="submit">Annuler</button>
+                <button class="btn btn-primary" type="submit" (click)="creerCompte()">Créer mon compte</button>
+                <button class="btn btn-secondary" type="submit" [routerLink]="['/acceuil']" routerLinkActive="router-link-active">Annuler</button>
             </form>
         </div>
     </div>

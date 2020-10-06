@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CreationCompteComponent implements OnInit {
   creationCompteForm: FormGroup;
+  isValider: boolean = false;
   
   constructor(private formBuilder: FormBuilder) { }
 
@@ -18,10 +19,43 @@ export class CreationCompteComponent implements OnInit {
       validationUsername: ['', Validators.required],
       validationEmail: ['', [Validators.required, Validators.email]],
       validationMdp: ['', [Validators.required, Validators.minLength(6)]],
-      validationMdpConfirmer: ['', Validators.required]
+      validationMdpConfirmer: ['', Validators.required],
+      accepterTerm: [false, Validators.requiredTrue]
     }, {
-      //validator: MustMatch('password', 'confirmPassword')
+      validator: this.concordanceMdp('validationMdp', 'validationMdpConfirmer')
   });
   }
+
+  get verifierChamp() { return this.creationCompteForm.controls; }
+
+  concordanceMdp(mdp: string, mdpConfirmer: string){
+    return (creationCompteForm: FormGroup) => {
+      const control = creationCompteForm.controls[mdp];
+      const matchingControl = creationCompteForm.controls[mdpConfirmer];
+
+      if (matchingControl.errors && !matchingControl.errors.concordanceMdp) {
+          // Si on trouve une erreur quelconque 
+          return;
+      }
+
+      // Si non concordance des mdp
+      if (control.value !== matchingControl.value) {
+          matchingControl.setErrors({ concordanceMdp: true });
+      } else {
+          matchingControl.setErrors(null);
+      }
+  }
+  }
+
+  creerCompte(){
+    this.isValider = true;
+    if(this.creationCompteForm.valid){
+      console.log("form valide");
+    }else{
+      console.log("form non valide");
+      return;
+    }
+  }
+
 
 }
