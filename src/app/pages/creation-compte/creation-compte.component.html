@@ -1,1 +1,84 @@
-<p>creation-compte works!</p>
+<div class="container">
+    <div class="card m-3">
+        <h5 class="card-header">Création de compte</h5>
+        <div class="card-body">
+            <form [formGroup]="creationCompteForm">
+                <div class="form-row">
+                    <!-- Prénom  -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationPrenom">Prénom</label>
+                        <input type="text" class="form-control" id="validationPrenom" placeholder="John" value="" required>
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <!-- /Prénom  -->
+                    <!-- Nom -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationNom">Nom</label>
+                        <input type="text" class="form-control" id="validationNom" placeholder="Doe" value="" required>
+                        <div class="valid-feedback">
+                            OK!
+                        </div>
+                    </div>
+                    <!-- /Nom -->
+                    <!-- UserName -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationUsername">Nom d'utilisateur</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend"><img src="./assets/creationCompte/person-24px.svg" alt="" srcset=""></span>
+                            </div>
+                            <input type="text" class="form-control" id="validationUsername" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                                S'il vous plaît, choisissez un nom d'utilisateur.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /UserName -->
+                </div>
+                <div class="form-row">
+                    <!-- E-mail -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationEmail">E-mail</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                            </div>
+                            <input type="e-mail" class="form-control" id="validationEmail" placeholder="name@mail.com" aria-describedby="inputGroupPrepend" required>
+                            <div class="invalid-feedback">
+                                Veuillez entrer un e-mail valide.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /E-mail -->
+                    <!-- Mdp -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationMdp">Mot de passe</label>
+                        <input type="password" class="form-control" id="validationMdp" value="" required>
+                    </div>
+                    <!-- /Mdp -->
+                    <!-- Confirmation Mdp -->
+                    <div class="col-md-4 mb-3">
+                        <label for="validationMdpConfirmer">Confirmation du mot de passe</label>
+                        <input type="password" class="form-control" id="validationMdpConfirmer" value="" required>
+                    </div>
+                    <!-- /Confirmation Mdp -->
+                </div>
+                <div class="form-group">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <label class="form-check-label" for="invalidCheck">
+                      Agree to terms and conditions
+                    </label>
+                        <div class="invalid-feedback">
+                            You must agre before submitting.
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" type="submit">Créer mon compte</button>
+                <button class="btn btn-secondary" type="submit">Annuler</button>
+            </form>
+        </div>
+    </div>
+</div>
