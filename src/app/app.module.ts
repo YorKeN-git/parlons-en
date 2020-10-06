@@ -8,6 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { ConferenceALaUneComponent } from './components/conference-ala-une/conference-ala-une.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ConferenceAVenirComponent } from './components/conference-avenir/conference-avenir.component';
+import { CreationCompteComponent } from './pages/creation-compte/creation-compte.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ConferenceAVenirComponent } from './components/conference-avenir/confer
     FooterComponent,
     ConferenceALaUneComponent,
     HomeComponent,
-    ConferenceAVenirComponent
+    ConferenceAVenirComponent,
+    CreationCompteComponent
   ],
   imports: [
     BrowserModule,
