@@ -9,6 +9,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ConferenceAVenirComponent } from './components/conference-avenir/conference-avenir.component';
 import { CreationCompteComponent } from './pages/creation-compte/creation-compte.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConnexionComponent } from './components/connexion/connexion.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ConferenceALaUneComponent,
     HomeComponent,
     ConferenceAVenirComponent,
-    CreationCompteComponent
+    CreationCompteComponent,
+    ConnexionComponent
   ],
   imports: [
     BrowserModule,
