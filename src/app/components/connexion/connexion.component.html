@@ -1,6 +1,11 @@
 <div>
-    <input type="email" class="form-control" id="email" placeholder="E-mail">
-    <input type="password" class="form-control" id="mdp" placeholder="Mot de passe">
-    <button type="button" class="btn btn-primary btn-block" [routerLink]="['/connexion']" routerLinkActive="router-link-active">Connexion</button>
+    <form [formGroup]="connexionForm">
+        <input type="email" class="form-control" id="email" placeholder="E-mail" formControlName="email" [ngClass]="{ 'is-invalid': isValider && verifierChamp.email.errors }">
+        <input type="password" class="form-control" id="mdp" placeholder="Mot de passe" formControlName="motdepasse" [ngClass]="{ 'is-invalid': isValider && verifierChamp.motdepasse.errors }">
+        <button type="submit" class="btn btn-primary btn-block" (click)="connexionUtilisateur()">Connexion</button>
+        <div class="invalid-feedback">
+            L'adresse e-mail ET / OU le mot de passe est incorecte.
+        </div>
+    </form>
     <button type="button" class="btn btn-link" [routerLink]="['/Creation-Compte']" routerLinkActive="router-link-active">Pas encore inscrit? C'est par ici !</button>
 </div>

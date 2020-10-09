@@ -10,6 +10,9 @@ import { ConferenceAVenirComponent } from './components/conference-avenir/confer
 import { CreationCompteComponent } from './pages/creation-compte/creation-compte.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConnexionComponent } from './components/connexion/connexion.component';
+import { CreateConfComponent } from './components/create-conf/create-conf.component';
+import { HttpClientModule } from '@angular/common/http';
+import { Utilisateur } from './modeles/utilisateur';
 
 @NgModule({
   declarations: [
@@ -20,15 +23,20 @@ import { ConnexionComponent } from './components/connexion/connexion.component';
     HomeComponent,
     ConferenceAVenirComponent,
     CreationCompteComponent,
-    ConnexionComponent
+    ConnexionComponent,
+    CreateConfComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
+    
   ],
-  providers: [],
+  providers: [
+    Utilisateur
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
