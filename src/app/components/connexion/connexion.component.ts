@@ -10,6 +10,7 @@ import { ConnexionService } from 'src/app/services/connexion.service';
 export class ConnexionComponent implements OnInit {
   connexionForm: FormGroup;
   isValider: boolean = false;
+  isErreurConnexion: boolean = false;
 
   constructor(private formBuilder: FormBuilder, private utilisateurService: ConnexionService) { }
 
@@ -28,11 +29,17 @@ export class ConnexionComponent implements OnInit {
       //Recuperd les données saisies 
       let email = this.connexionForm.get('email').value;
       let mdp = this.connexionForm.get('motdepasse').value;
-      console.log("Avant d'utiliser mon service "+ email + ' ' + mdp)
+      //console.log("Avant d'utiliser mon service "+ email + ' ' + mdp)
       this.utilisateurService.connexionUtilisateur(email, mdp);
+      setTimeout(this.verifierErreurConnexion,3000);
+      //console.log(this.isErreurConnexion);
     }else{
-      return;
+      return ;
     }
+  }
+
+  verifierErreurConnexion(){
+    this.isErreurConnexion = this.utilisateurService.getErreurConnexion();
   }
 
 }
