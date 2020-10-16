@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Utilisateur } from 'src/app/modeles/utilisateur';
 import { ConnexionService } from 'src/app/services/connexion.service';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-connexion',
@@ -17,7 +18,8 @@ export class ConnexionComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private utilisateurService: ConnexionService,
-              private router: Router) { }
+              private router: Router,
+              private headerComp: HeaderComponent) { }
 
   ngOnInit() {
     this.connexionForm = this.formBuilder.group({
@@ -49,6 +51,7 @@ export class ConnexionComponent implements OnInit {
               localStorage.setItem('userConnecte', JSON.stringify(this.utilisateurConnecte));
               //redirection vers la page d'acceuil
               this.router.navigate(['/acceuil']);
+              this.headerComp.ngOnInit();
               //WIP get info user sur home 
             }else{
               console.log("Les mdp concordent pas !");

@@ -1,5 +1,4 @@
 <header>
-    <h1>Parlons-en !</h1>
     <nav class="navbar navbar-expand-lg navbar-custom bg-custom" id="bg-custom ">
         <a class="navbar-brand" href="">Parlons-en !</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -24,7 +23,7 @@
                             <a class="dropdown-item" href="#"><img src="./assets/profil/account_circle-24px.svg" alt="">{{pseudo}}</a>
                             <a class="dropdown-item" href="#">Mon Profile</a>
                             <div class="dropdown-divider"></div>
-                            <button type="button" class="btn btn-danger btn-block">Déconnexion</button>
+                            <button type="button" class="btn btn-danger btn-block" (click)="deconnexionUtilisateur()">Déconnexion</button>
                         </div>
                         <app-connexion *ngIf="!isConnecter"></app-connexion>
                     </div>
