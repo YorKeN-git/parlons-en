@@ -3,14 +3,9 @@
         <input type="email" class="form-control" id="email" placeholder="E-mail" formControlName="email" [ngClass]="{ 'is-invalid': isValider && verifierChamp.email.errors }">
         <input type="password" class="form-control" id="mdp" placeholder="Mot de passe" formControlName="motdepasse" [ngClass]="{ 'is-invalid': isValider && verifierChamp.motdepasse.errors }">
         <button type="submit" class="btn btn-primary btn-block" (click)="connexionUtilisateur()">Connexion</button>
-        <div class="invalid-feedback" *ngIf="(isValider && verifierChamp.email.errors) || (isValider && verifierChamp.motdepasse.errors)">
+        <div class="text-danger" *ngIf="(isValider && verifierChamp.email.errors) || (isValider && verifierChamp.motdepasse.errors) || isErreurConnexion">
             L'adresse e-mail ET / OU le mot de passe est incorecte.
         </div>
-
-        <div class="alert alert-danger" role="alert" *ngIf="isErreurConnexion">
-            L'adresse e-mail ET / OU le mot de passe est incorecte.
-        </div>
-
     </form>
     <button type="button" class="btn btn-link" [routerLink]="['/Creation-Compte']" routerLinkActive="router-link-active">Pas encore inscrit? C'est par ici !</button>
 </div>

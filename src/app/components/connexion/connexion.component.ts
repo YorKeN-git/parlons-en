@@ -38,29 +38,42 @@ export class ConnexionComponent implements OnInit {
       //Vérifier la connexion
       this.utilisateurService.connexionUtilisateur(email, mdp).subscribe(
         (response) => {
-          this.utilisateurConnecte = new Utilisateur();
-          this.utilisateurConnecte = response ;
-          if(mdp == this.utilisateurConnecte.mdp){
-            //Concordance des mot de passe 
-            console.log("Les mdp concordent !");
-            this.isErreurConnexion = false;
-            localStorage.setItem('userConnecte', JSON.stringify(this.utilisateurConnecte));
-            this.router.navigate(['/acceuil']);
-            //WIP get info user sur home 
+          if(response != null){
+            this.utilisateurConnecte = new Utilisateur();
+            this.utilisateurConnecte = response ;
+            if(mdp == this.utilisateurConnecte.mdp){
+              //Concordance des mot de passe 
+              console.log("Les mdp concordent !");
+              this.isErreurConnexion = false;
+              //enregistre en localstorage l'utilisateur 
+              localStorage.setItem('userConnecte', JSON.stringify(this.utilisateurConnecte));
+              //redirection vers la page d'acceuil
+              this.router.navigate(['/acceuil']);
+              //WIP get info user sur home 
+            }else{
+              console.log("Les mdp concordent pas !");
+              this.afficherErreur();
+            }
           }else{
-            console.log("Les mdp concordent pas !");
-            this.isErreurConnexion = true;
+            console.log("Adresse e-mail inconnu en BDD !");
+            this.afficherErreur();
           }
+          
         },
       (error) => {
-        this.isErreurConnexion = true;
+        this.afficherErreur();
         //alert("Une erreur est survenue lors de la requête");
       }
     );
       
     }else{
+      this.afficherErreur();
       return ;
     }
+  }
+
+  afficherErreur(){
+    this.isErreurConnexion = true;
   }
 
   // verifierErreurConnexion(){
