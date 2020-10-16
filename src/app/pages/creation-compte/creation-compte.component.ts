@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Utilisateur } from 'src/app/modeles/utilisateur';
 import { CreationCompteService } from 'src/app/services/creation-compte.service';
 
 @Component({
@@ -10,7 +11,10 @@ import { CreationCompteService } from 'src/app/services/creation-compte.service'
 export class CreationCompteComponent implements OnInit {
   creationCompteForm: FormGroup;
   isValider: boolean = false;
-  
+  isCreationOK: boolean = false;
+  isCreanonNonOK: boolean = false;
+  isEmailExiste: boolean = false;
+
   constructor(private formBuilder: FormBuilder,private creationCompteService: CreationCompteService) { }
 
   ngOnInit() {
@@ -45,20 +49,53 @@ export class CreationCompteComponent implements OnInit {
       } else {
           matchingControl.setErrors(null);
       }
-  }
+    }
   }
 
   creerCompte(){
     this.isValider = true;
     if(this.creationCompteForm.valid){
-      console.log("form valide");
+      //console.log("form valide");
       //recuperd les informations du formulaire 
       let nom = this.creationCompteForm.get('validationNom').value;
       let prenom = this.creationCompteForm.get('validationPrenom').value;
       let userName = this.creationCompteForm.get('validationUsername').value;
       let email = this.creationCompteForm.get('validationEmail').value;
       let mdp = this.creationCompteForm.get('validationMdp').value;
-      this.creationCompteService.crerCompteUtilisateur(nom, prenom, userName, email, mdp);
+      this.creationCompteService.verifierEmailExistant(email).subscribe(
+        (response) =>{
+          if( response != null){
+            //l'adresse email existe déjà en BDD 
+            this.isEmailExiste = true;
+            this.isCreanonNonOK = false;
+            this.isCreationOK = false;
+            this.creationCompteForm.reset();
+          }else{
+            this.creationCompteService.crerCompteUtilisateur(nom, prenom, userName, email, mdp).subscribe(
+              (response) => {
+                if(response != null){
+                  //Creation ok
+                  this.isEmailExiste = false;
+                  this.isCreanonNonOK = false;
+                  this.isCreationOK = true;
+                }else{
+                  //Création Non ok 
+                  this.isEmailExiste = false;
+                  this.isCreanonNonOK = true;
+                  this.isCreationOK = false;
+                }
+              },
+              (error) => {
+                //Une erreur c'est produite 
+                this.isEmailExiste = false;
+                this.isCreanonNonOK = true;
+                this.isCreationOK = false;
+              }
+            );
+          }
+        }
+      );
+      
     }else{
       return;
     }

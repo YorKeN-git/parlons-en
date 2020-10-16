@@ -1,14 +1,23 @@
 <div class="container">
     <div class="card m-3">
         <h5 class="card-header">Création de compte</h5>
+        <div class="text-danger" *ngIf="isCreanonNonOK">
+            Oups ! Une erreur c'est produite lors de la requête ! Veuillez réessayer ultérieurement.
+        </div>
+        <div class="text-success" *ngIf="isCreationOK">
+            Votre compte à bien été creer, vous pouvez vous connecter à présent !
+        </div>
+        <div class="text-danger" *ngIf="isEmailExiste">
+            Un compte existe déjà avec cet adresse e-mail.
+        </div>
         <div class="card-body">
             <form [formGroup]="creationCompteForm">
                 <div class="form-row">
                     <!-- Prénom  -->
                     <div class="col-md-4 mb-3">
                         <label for="validationPrenom">Prénom</label>
-                        <input type="text" class="form-control" id="validationPrenom" formControlName="validationPrenom" placeholder="John" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationPrenom.errors }">
-                        <div class="text-danger">
+                        <input type="text" class="form-control" id="validationPrenom" formControlName="validationPrenom" placeholder="John" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationPrenom.errors }">
+                        <div class="text-danger" *ngIf="isValider && verifierChamp.validationPrenom.errors">
                             Prénom est requis !
                         </div>
                     </div>
@@ -16,8 +25,8 @@
                     <!-- Nom -->
                     <div class="col-md-4 mb-3">
                         <label for="validationNom">Nom</label>
-                        <input type="text" class="form-control" id="validationNom" formControlName="validationNom" placeholder="Doe" value="" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationNom.errors }">
-                        <div class="text-danger">
+                        <input type="text" class="form-control" id="validationNom" formControlName="validationNom" placeholder="Doe" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationNom.errors }">
+                        <div class="text-danger" *ngIf="isValider && verifierChamp.validationNom.errors">
                             Nom est requis !
                         </div>
                     </div>
@@ -30,7 +39,7 @@
                                 <span class="input-group-text" id="inputGroupPrepend"><img src="./assets/creationCompte/person-24px.svg" alt="" srcset=""></span>
                             </div>
                             <input type="text" class="form-control" id="validationUsername" formControlName="validationUsername" placeholder="Nom d'utilisateur" aria-describedby="inputGroupPrepend" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationUsername.errors }">
-                            <div class="text-danger">
+                            <div class="text-danger" *ngIf="isValider && verifierChamp.validationUsername.errors">
                                 Nom d'utilisateur est requis !
                             </div>
                         </div>
@@ -46,7 +55,7 @@
                                 <span class="input-group-text" id="inputGroupPrepend">@</span>
                             </div>
                             <input type="e-mail" class="form-control" id="validationEmail" formControlName="validationEmail" placeholder="name@mail.com" aria-describedby="inputGroupPrepend" required [ngClass]="{ 'is-invalid': isValider && verifierChamp.validationEmail.errors }">
-                            <div class="text-danger">
+                            <div class="text-danger" *ngIf="isValider && verifierChamp.validationEmail.errors">
                                 Veuillez entrer un e-mail valide.
                             </div>
                         </div>

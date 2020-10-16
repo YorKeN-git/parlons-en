@@ -19,8 +19,7 @@ export class ConnexionService {
   utilisateurConnecte: Utilisateur ; 
   erreurConnexion: boolean;
 
-  constructor(private http: HttpClient, 
-              private utilisateur: Utilisateur) { }
+  constructor(private http: HttpClient) { }
 
   connexionUtilisateur(email: string, mdp: string){
     return this.http.get<Utilisateur>(this.url + email, this.httpOptions);

@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { sha256 } from 'js-sha256';
 import { Utilisateur } from '../modeles/utilisateur';
@@ -8,8 +9,18 @@ import { Utilisateur } from '../modeles/utilisateur';
 export class CreationCompteService {
 
   utilisateur: Utilisateur;
-
-  constructor() { }
+  url: string = "http://localhost:8080/utilisateur/";
+  //Header option
+  httpOptions = {
+    headers: new HttpHeaders({ 
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    })
+  };
+  emailExistant: boolean; 
+  
+  constructor(private http: HttpClient) { }
 
   /*
    * 
@@ -29,8 +40,9 @@ export class CreationCompteService {
     this.utilisateur.userName = userName;
     this.utilisateur.email = email;
     this.utilisateur.mdp = mdp;
-    console.log(this.utilisateur);
-    //TODO BACK END 
+    //console.log(this.utilisateur);
+    return this.http.post<Utilisateur>(this.url, this.utilisateur, this.httpOptions);
+
   }
 
   hashMotDePasse(mdp: string){
@@ -38,5 +50,9 @@ export class CreationCompteService {
     mdpCrypter = sha256(mdp);
     //console.log(mdpCrypter);
     return mdpCrypter
+  }
+
+  verifierEmailExistant(email: String){
+    return this.http.get<Utilisateur>(this.url + email, this.httpOptions);
   }
 }

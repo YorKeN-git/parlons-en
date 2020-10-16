@@ -51,8 +51,8 @@ export class ConnexionComponent implements OnInit {
               localStorage.setItem('userConnecte', JSON.stringify(this.utilisateurConnecte));
               //redirection vers la page d'acceuil
               this.router.navigate(['/acceuil']);
+              //recharge notre header pour chercher nouvelles infos
               this.headerComp.ngOnInit();
-              //WIP get info user sur home 
             }else{
               console.log("Les mdp concordent pas !");
               this.afficherErreur();
