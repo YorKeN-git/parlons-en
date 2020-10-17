@@ -62,12 +62,15 @@ export class CreateConfComponent implements OnInit {
         conference.dateConference = this.creationConfForm.get('heureConference').value;
       }
       conference.createur = this.getCreateurConference();
+      conference.urlImg = this.urlImg;
+      conference.theme = this.creationConfForm.get('themeConf').value;
       this.conferenceService.creerConference(conference).subscribe(
         (response) => {
           if(response != null){
             //Creation ok de la conference
             this.isCreationOk = true;
             this.isErreurCreation = false;
+            this.creationConfForm.reset();
             //TODO redirection vers la page conference
           }
         },

@@ -1,0 +1,22 @@
+<div class="container">
+    <h1>Conférence en cours !</h1>
+    <div class="alert alert-info" role="alert" *ngIf="isPasDeConferenceEnCours">
+        Il n'y a pas de conférence en cours.
+    </div>
+    <div class="alert alert-danger" role="alert" *ngIf="isErreurConferenceEnCours">
+        Oups ! Une erreur est survenu dans la récupération des conférences en cours.
+    </div>
+    <div class="card-deck" *ngIf="!isPasDeConferenceEnCours">
+        <div *ngFor="let conference of listConference">
+            <div class="card">
+                <img class="card-img-top" src={{conference.urlImg}}>
+                <div class="card-body">
+                    <h5 class="card-title">{{conference.titre}}</h5>
+                    <p class="card-text">{{conference.description}}</p>
+                    <p class="card-text"><small class="text-muted">Crée par : {{conference.createur}}</small></p>
+                    <button type="button" class="btn btn-primary btn-lg btn-block">Rejoindre</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

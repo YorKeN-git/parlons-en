@@ -13,6 +13,7 @@ import { ConnexionComponent } from './components/connexion/connexion.component';
 import { CreateConfComponent } from './components/create-conf/create-conf.component';
 import { HttpClientModule } from '@angular/common/http';
 import { Utilisateur } from './modeles/utilisateur';
+import { ConferenceEnCourComponent } from './components/conference-en-cour/conference-en-cour.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { Utilisateur } from './modeles/utilisateur';
     ConferenceAVenirComponent,
     CreationCompteComponent,
     ConnexionComponent,
-    CreateConfComponent
+    CreateConfComponent,
+    ConferenceEnCourComponent
   ],
   imports: [
     BrowserModule,

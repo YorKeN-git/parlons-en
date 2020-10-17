@@ -7,6 +7,7 @@ export class Conference {
     heureConference: string;
     urlImg: string;
     createur: string;
+    theme: string; 
 
     Conference(){
 
