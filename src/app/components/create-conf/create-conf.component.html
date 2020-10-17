@@ -1,6 +1,12 @@
 <div class="container">
     <div class="card m-3">
         <h5 class="card-header">Création d'une conférence</h5>
+        <div class="text-danger" *ngIf="isErreurCreation">
+            Oups ! Une erreur c'est produite lors de la création de la conférence, Veuillez essayer ultérieurement.
+        </div>
+        <div class="text-success" *ngIf="isCreationOk">
+            La conférence a été créer avec succès!
+        </div>
         <div class="card-body">
             <form [formGroup]="creationConfForm">
                 <div class="form-group row">
@@ -19,15 +25,15 @@
                         <textarea class="form-control" placeholder="Description de la conférence (optionnel)" formControlName="description"></textarea>
                     </div>
                 </div>
-                <script async src="https://imgbb.com/upload.js"></script>
                 <div class="form-group">
-                    <label for="imgConference">Image de la conférence :</label>
-                    <input type="file" class="form-control-file" id="imgConference" formControlName="urlImg" (change)="afficherImgConf($event.target.files)" [ngClass]="{ 'is-invalid': isValider && verifierChamp.urlImg.errors }">
-                    <div class="text-danger" *ngIf="isValider && verifierChamp.urlImg.errors">
-                        Image est requis.
-                        <p><small>Conseil : Une image permettra de rendre plus pertinente votre conférence !</small></p>
+                    <select class="custom-select" (change)=afficherImgTheme($event.target.value) formControlName="themeConf">
+                    <option selected>Choisissez le thème de votre conférence...</option>
+                    <option *ngFor="let theme of listThemes" [value]="theme">{{theme}}</option>
+                  </select>
+                    <div class="text-danger" *ngIf="isValider && verifierChamp.themeConf.errors">
+                        Vous devez choisir un thème.
                     </div>
-                    <img [src]="{{urlImg}}" height="200">
+                    <img src={{urlImg}} class="imgConf">
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="debutConference" formControlName="debutConference" id="maintenant" value="maintenant" (change)="afficherPrgConf($event.target.value)" [ngClass]="{ 'is-invalid': isValider && verifierChamp.debutConference.errors }">
